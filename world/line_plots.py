@@ -33,5 +33,26 @@ plt.xticks(rotation=45, size=6)
 plt.title('COVID-19 Confirmed Cases')
 plt.ylabel('Confirmed Cases (log)')
 plt.xlabel('')
-plt.savefig('plots/total_cases_origin.png')
+plt.savefig('plots/confirmed_cases_date.png')
+plt.close()
+
+
+# cumulative curve for multiple countries in days since case 0
+title = 'COVID-19 confirmed cases'
+path = 'plots/cases_countries'
+countries = ['Colombia', 'Mexico', 'Spain', 'Italy', 'US', 'Venezuela', 'Ecuador', 'Peru', 'Brazil']
+data_countries = getData.get_countries_confirmed(countries)
+countries = data_countries.columns
+for country in countries[1:]:
+    data_country = data_countries.loc[:, ['date', country]]
+    data_country = data_country[data_country[country] > 1]
+    initial_day = data_country['date'].min()
+    data_country['day'] = data_country['date'] - initial_day
+    data_country['day'] = data_country['day'] / np.timedelta64(1, 'D')
+    ax = sns.lineplot(x='day', y=country, data=data_country, label=country)
+ax.set(yscale="log")
+plt.title('COVID-19 Confirmed Cases')
+plt.ylabel('Confirmed Cases (log)')
+plt.xlabel('Days after case zero')
+plt.savefig('plots/confirmed_cases_days.png')
 plt.close()
