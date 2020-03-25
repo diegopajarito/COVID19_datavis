@@ -13,6 +13,6 @@ def get_ins_data():
 def get_ins_data_file():
     ins_co_data = pd.read_csv(ins_co_file)
     ins_co_data.columns = names
-    ins_co_data['date'] = pd.to_datetime(ins_co_data['date'])
+    ins_co_data['date'] = pd.to_datetime(ins_co_data['date'], dayfirst=True)
     return ins_co_data
 
