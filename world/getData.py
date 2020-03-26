@@ -1,11 +1,10 @@
 import pandas as pd
 import numpy as np
-import urllib.request
 
 # Data source repo: https://github.com/CSSEGISandData
 # Mind the changes in data structure for the latest changes
 jhu_link_confirmed = 'https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
-jhu_link_deaths = 'https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
+jhu_link_deaths = 'https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
 jhu_file_deaths = 'data/time_series_covid19_deaths_global.csv'
 jhu_confirmed = ''
 jhu_deaths = ''
@@ -80,10 +79,23 @@ def get_death_rates():
     jhu_confirmed = get_jhu_confirmed()
     jhu_deaths = get_jhu_deaths()
     last_date = jhu_confirmed.columns[-1]
-    death_rates = pd.DataFrame(jhu_confirmed['Country/Region'])
-    death_rates['days_after_c1'] = jhu_confirmed.iloc[:, 4:].count(axis='columns')
+    death_rates = pd.DataFrame(jhu_confirmed['Province/State'])
+    death_rates.columns = ['country']
+    death_rates.loc[death_rates['country'].isna(), ['country']] = \
+        jhu_confirmed.loc[jhu_confirmed['Province/State'].isna(), 'Country/Region']
+    death_rates['days_after_c1'] = 0
+    for index, row in jhu_confirmed.iterrows():
+        country_data = row[4:]
+        country_data = country_data.reset_index()
+        country_data.columns = ['day', 'confirmed']
+        country_data = country_data[country_data['confirmed'] > 0]
+        country_data['day'] = pd.to_datetime(country_data['day'])
+        days_after_c1 = country_data['day'].max() - country_data['day'].min()
+        death_rates.loc[index, 'days_after_c1'] = days_after_c1/np.timedelta64(1, 'D')
+    death_rates['confirmed_cases'] = jhu_confirmed[last_date]
+    death_rates['death_cases'] = jhu_deaths[last_date]
     death_rates['death_rate'] = jhu_deaths[last_date] / jhu_confirmed[last_date] * 100
-    death_rates['death_rate'].replace([np.inf, -np.inf], np.nan)
+    death_rates = death_rates[death_rates['confirmed_cases'] > 0]
     return death_rates
 
 #data = get_death_rates()

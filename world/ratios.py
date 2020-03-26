@@ -45,6 +45,20 @@ plt.close()
 
 
 death_rates = getData.get_death_rates()
-sns.distplot(death_rates.iloc[:208, 'death_rate'])
-sns.distplot(death_rates.iloc[:208, 2])
-sns.boxplot(death_rates.iloc[:208, 2])
+sns.distplot(death_rates['death_rate'])
+sns.scatterplot('days_after_c1', 'death_rate', data=death_rates)
+sns.scatterplot('confirmed_cases', 'death_rate', data=death_rates, size=0.3, alpha=0.7, legend=False)
+
+
+sns.scatterplot('days_after_c1', 'death_rate', data=death_rates, size=0.3, alpha=0.7, legend=False)
+
+
+sns.scatterplot('confirmed_cases', 'death_rate', data=death_rates[death_rates['confirmed_cases'] > 500], size=0.3, alpha=0.7, legend=False)
+
+
+
+ax = sns.scatterplot('confirmed_cases', 'death_rate', data=death_rates[death_rates['confirmed_cases'] > 1000], size='death_cases', alpha=0.6)
+ax.set(xscale='log')
+
+
+sns.scatterplot('death_cases', 'death_rate', data=death_rates[death_rates['death_cases'] > 30], size='confirmed_cases', alpha=0.6)
