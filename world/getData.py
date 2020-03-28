@@ -1,8 +1,12 @@
 import pandas as pd
 import numpy as np
+import requests
+import zipfile
+import io
 
 # Data source repo: https://github.com/CSSEGISandData
 # Mind the changes in data structure for the latest changes
+wb_gdp = 'http://api.worldbank.org/v2/en/indicator/NY.GDP.MKTP.CD?downloadformat=csv'
 jhu_link_confirmed = 'https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
 jhu_link_deaths = 'https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
 jhu_file_deaths = 'data/time_series_covid19_deaths_global.csv'
@@ -12,8 +16,8 @@ jhu_deaths = ''
 
 def get_jhu_confirmed():
     if jhu_confirmed == '':
-        return pd.read_csv('data/time_series_covid19_confirmed_global.csv')
-        # return pd.read_csv(jhu_link_confirmed)
+        # return pd.read_csv('data/time_series_covid19_confirmed_global.csv')
+        return pd.read_csv(jhu_link_confirmed)
     else:
         return jhu_confirmed
 
@@ -48,6 +52,14 @@ def get_countries_confirmed(countries):
         countries_data.columns = ['date'] + country_names
         countries_data['date'] = pd.to_datetime(countries_data['date'])
     return countries_data
+
+
+def get_confirmed_aggregated():
+    jhu_confirmed = get_jhu_confirmed()
+    jhu_confirmed = jhu_confirmed.iloc[:, 1:]
+    jhu_confirmed = jhu_confirmed.groupby('Country/Region', as_index=False)
+    jhu_confirmed = jhu_confirmed.sum()
+    return jhu_confirmed
 
 
 def get_country_deaths(country):
@@ -97,6 +109,16 @@ def get_death_rates():
     death_rates['death_rate'] = jhu_deaths[last_date] / jhu_confirmed[last_date] * 100
     death_rates = death_rates[death_rates['confirmed_cases'] > 0]
     return death_rates
+
+
+def get_gdp():
+    request = requests.get(wb_gdp)
+    zip_file = zipfile.ZipFile(io.BytesIO(request.content))
+    gdp = pd.read_csv(zip_file.extract('API_NY.GDP.MKTP.CD_DS2_en_csv_v2_887264.csv'), skiprows=4)
+    gdp = gdp[['Country Name', 'Country Code', '2018']]
+    gdp.columns = ['country_name', 'country_code', 'gdp_2018']
+    return gdp
+
 
 #data = get_death_rates()
 #print (data)

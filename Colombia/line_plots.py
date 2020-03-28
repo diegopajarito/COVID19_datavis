@@ -49,7 +49,7 @@ ylim = daily_total['total_cases'].max() + 10
 images = []
 for day in daily_total['day']:
     title = 'Confirmed cases COVID-19 in Colombia. Day %i' % day
-    ax = sns.lineplot('day', 'total_cases', data=daily_total[daily_total['day'] <= day])
+    ax = sns.lineplot('day', 'total_cases', data=daily_total[daily_total['day'] >= day])
     ax.set(xlabel='Days after first case detected', ylabel='Confirmed cases',
            xlim=(0, xlim), ylim=(0, ylim), title=title)
     ax1 = sns.scatterplot('day', 'new_cases', data=daily_total[daily_total['day'] <= day], alpha=0.5)
