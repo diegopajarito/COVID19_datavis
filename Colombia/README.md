@@ -10,3 +10,12 @@ Colombia
 'Sexo'  --> 'sex'
 'Tipo*'  --> 'Origin'
 'Pais de Procedencia' --> 'Origin_country'
+
+
+Datos:
+- Municipio: https://sigot.igac.gov.co/
+- Aeropuerto: datos.gov.co
+
+
+libraries for geopandas 
+- descartes
