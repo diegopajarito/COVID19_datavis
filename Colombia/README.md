@@ -14,6 +14,7 @@ Colombia
 
 Datos:
 - Municipio: https://sigot.igac.gov.co/
+- Departamento
 - Aeropuerto: datos.gov.co
 
 
