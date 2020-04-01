@@ -59,13 +59,13 @@ print('Done with individual plots')
 
 
 # Single plot with region maps
-title = 'COVID-19 Confirmed cases per municipality and inter. airports in Colombia'
+title = 'COVID-19 confirmed cases & airports in Colombia (Bogotá)'
 fig, ((ax1, ax2), (ax3, ax4), (ax5, ax6)) = plt.subplots(3, 2, figsize=(7, 9))
 gs = ax1.get_gridspec()
 ax1.remove()
 ax2.remove()
 ax1 = fig.add_subplot(gs[0, 0:])
-airport_areas = [['Bogotá', (-77.5, 3, -71.5, 6.6), ax1],
+airport_areas = [['  ', (-77.5, 3, -71.5, 6.6), ax1],
                  ['Medellín', (-76.8, 5.6, -74.8, 7.1), ax3],
                  ['Cali', (-77, 3.3, -75, 4.8), ax4],
                  ['North-East', (-74, 6.9, -72, 8.4), ax5],
@@ -91,7 +91,7 @@ for region in airport_areas:
 fig.suptitle(title, fontsize=13)
 fig.tight_layout()
 plt.show()
-plt.savefig('maps/map_congation_airports.png')
+plt.savefig('maps/map_contagion_airports.png')
 plt.close()
 
 print('Done')
