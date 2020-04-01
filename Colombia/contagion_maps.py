@@ -77,7 +77,7 @@ for region in airport_areas:
     ax = region[2]
     base = boundaries.plot(ax=ax, color='black', edgecolor='gray', linewidth=0.2)
     boundaries_region.plot(ax=base, color='None', edgecolor='gray', linewidth=0.8)
-    if region[0] == 'Bogotá':
+    if ax == ax1:
         geodata.plot(ax=base, column='cases', cmap='OrRd', legend=True, legend_kwds={'label': "Cases"})
     else:
         boundaries_region.plot(ax=base, color='None', edgecolor='gray', linewidth=0.8)
