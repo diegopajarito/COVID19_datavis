@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-import imageio
 import getData
 
 data = getData.get_ins_data_file()
