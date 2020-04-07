@@ -68,7 +68,7 @@ ax1 = fig.add_subplot(gs[0, 0:])
 airport_areas = [['  ', (-77, 3.5, -72, 5.8), ax1],
                  ['Medellín', (-76.8, 5.6, -74.8, 7.1), ax3],
                  ['Cali', (-77, 3.3, -75, 4.8), ax4],
-                 ['North-East', (-74, 6.9, -72, 8.4), ax5],
+                 ['Bucaramanga - Cúcuta', (-74, 6.9, -72, 8.4), ax5],
                  ['Caribbean Coast', (-76, 9.7, -72.5, 12.325), ax6]]
 for region in airport_areas:
     limits = region[1]
