@@ -15,6 +15,7 @@ Death rate: The script aims to visualise the evolution of Covid-19 death trends 
 
 Maps: The [script](contagion_maps.py) uses [the Geopandas library](https://geopandas.org/) and official geospatial data from Colombia to map the spatial distribution of the cases.
 
+![maps/map_contagion_airports.png](Contagion Map)
 # Data Structures
 
 Note: To benefit international researchers and developers as well as to make this repository "discoverable" in the web, all documentation and source code will use English as the main language.
