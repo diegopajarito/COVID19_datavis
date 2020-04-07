@@ -9,13 +9,13 @@ Data Access: The [script](getData.py) sets the functions to get the CSV file fro
 
 General trends: The [script](line_plots.py) uses the [Seaborn Library](https://seaborn.pydata.org/) to plot the general trends for Colombia's total cases by source and treatment.
 
-![plots/total_cases.png](Total Cases)
+![Total Cases](plots/total_cases.png)
 
 Death rate: The script aims to visualise the evolution of Covid-19 death trends in Colombia. 
 
 Maps: The [script](contagion_maps.py) uses [the Geopandas library](https://geopandas.org/) and official geospatial data from Colombia to map the spatial distribution of the cases.
 
-![maps/map_contagion_airports.png](Contagion Map)
+![Contagion Map](maps/map_contagion_airports.png)
 # Data Structures
 
 Note: To benefit international researchers and developers as well as to make this repository "discoverable" in the web, all documentation and source code will use English as the main language.
@@ -25,7 +25,7 @@ Note: To benefit international researchers and developers as well as to make thi
 The government of Colombia distributes the official data set of Covid-19 Cases as a csv file using an [Infogram Widget](https://coronaviruscolombia.gov.co).
 From that structure, the data access script sets a data structure based on the original structure according to the following list.
 
-| *Original Name* | *Field name |
+| *Original Name* | *Field name* |
 | --- | --- |
 | 'ID de caso' | 'id_case' |
 | 'Fecha de diagnóstico' | 'date' |
