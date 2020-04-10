@@ -37,10 +37,11 @@ plt.savefig('plots/confirmed_cases_date.png')
 plt.close()
 
 
+
 # cumulative curve for multiple countries in days since case 0
 title = 'COVID-19 confirmed cases'
 path = 'plots/cases_countries'
-countries = ['Colombia', 'Mexico', 'Spain', 'Italy', 'US', 'Venezuela', 'Ecuador', 'Peru', 'Brazil']
+countries = ['Colombia', 'Mexico', 'Spain', 'Italy', 'US', 'Ecuador', 'Peru', 'Brazil']
 data_countries = getData.get_countries_confirmed(countries)
 countries = data_countries.columns
 for country in countries[1:]:
@@ -56,3 +57,5 @@ plt.ylabel('Confirmed Cases (log)')
 plt.xlabel('Days after case zero')
 plt.savefig('plots/confirmed_cases_days.png')
 plt.close()
+
+

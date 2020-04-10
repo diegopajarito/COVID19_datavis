@@ -45,6 +45,8 @@ def get_countries_confirmed(countries):
     jhu_confirmed = get_jhu_confirmed()
     countries_data = jhu_confirmed[jhu_confirmed['Country/Region'].isin(countries)]
     if len(countries_data) > 0:
+        countries_data = countries_data.groupby('Country/Region', as_index=False)
+        countries_data = countries_data.sum()
         country_names = list(countries_data['Country/Region'])
         countries_data = countries_data.iloc[:, 4:]
         countries_data = countries_data.T
@@ -78,10 +80,15 @@ def get_countries_death_rates(countries):
     jhu_confirmed = get_jhu_confirmed()
     jhu_deaths = get_jhu_deaths()
     jhu_confirmed = jhu_confirmed[jhu_confirmed['Country/Region'].isin(countries)]
+    jhu_confirmed = jhu_confirmed.groupby('Country/Region', as_index=False)
+    jhu_confirmed = jhu_confirmed.sum()
     jhu_deaths = jhu_deaths[jhu_deaths['Country/Region'].isin(countries)]
+    jhu_deaths = jhu_deaths.groupby('Country/Region', as_index=False)
+    jhu_deaths = jhu_deaths.sum()
     countries_death_rates = jhu_deaths.iloc[:, 4:] / jhu_confirmed.iloc[:, 4:] * 100
     countries_death_rates = countries_death_rates.T
     countries_death_rates = countries_death_rates.reset_index()
+    country_names = list(jhu_confirmed['Country/Region'])
     countries_death_rates.columns = ['date'] + countries
     countries_death_rates['date'] = pd.to_datetime(countries_death_rates['date'])
     return countries_death_rates
