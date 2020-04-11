@@ -24,7 +24,8 @@ def get_jhu_confirmed():
 
 def get_jhu_deaths():
     if jhu_deaths == '':
-        return pd.read_csv(jhu_file_deaths)
+        # return pd.read_csv(jhu_file_deaths)
+        return  pd.read_csv(jhu_link_deaths)
     else:
         return jhu_confirmed
 

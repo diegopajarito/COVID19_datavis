@@ -9,9 +9,17 @@ Through multiple Python functions (e.g., Pandas, Seaborn, Geopandas, among other
 
 This section offers tools to explore the trends of COVID-19 confirmed cases and death rates across different coutries.
 
-![Confirmed cases](world/plots/confirmed_cases_days.png)
+![Confirmed cases](world/plots/top_10.png)
+
+There are options to compare Colombia and its neighbourhood
+
+![Confirmed cases_Colombia](world/plots/co_neighbourhood.png)
+
+Also an importan effort to visualise deaths and death rates.
 
 ![Death rates](world/plots/death_rate_countries.png)
+
+![Deat_rates_evolution](world/plots/deaths_rates_days.png)
 
 For this particular section, I have developed a Notebook (i.e., Google Colab version) for the basic plotting task. Find it [here](world/Ex_1_Covid19_country_trends.ipynb) and check this easy-to-use format.
 
