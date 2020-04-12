@@ -17,7 +17,7 @@ for country in countries[1:]:
     ax = sns.lineplot(x='date', y=country, data=data_country.dropna(), label=country)
 plt.title('COVID-19 Death Rates')
 plt.ylabel('Death Rates (%)')
-plt.ylim(0, 11)
+plt.ylim(0, 13)
 plt.xticks(rotation=45, size=6)
 plt.savefig(path)
 plt.close()
