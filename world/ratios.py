@@ -6,7 +6,7 @@ import getData
 
 
 # Death rate curve for multiple countries since case 0
-title = 'COVID-19 death cases'
+title = 'COVID-19 death / conformed cases'
 path = 'plots/death_rate_countries'
 countries = ['China', 'France', 'Germany', 'Italy', 'Iran',  'Spain', 'Switzerland', 'Turkey', 'United Kingdom', 'US']
 # countries = ['Colombia', 'Mexico', 'Spain', 'Italy', 'US', 'Venezuela', 'Ecuador', 'Peru', 'Brazil']
