@@ -11,18 +11,16 @@ airports = 'data/aeropuertos.geojson'
 boundaries = geopandas.read_file(boundaries)
 boundaries_region = geopandas.read_file(boundaries_region)
 airports = geopandas.read_file(airports)
-data = getData.get_ins_data_file()
+data = getData.get_ins_data()
 
-data = data.groupby('city', as_index=False)
+data = data.groupby('divipola', as_index=False)
 data = data['id_case'].count()
-data.columns = ['city', 'cases']
+data.columns = ['divipola', 'cases']
 
 # Preparation for text comparison
-data['city_key'] = data['city'].str.lower()
-boundaries['boundary_key'] = boundaries['NOM_MUNICI'].str.lower()
-data.loc[data['city_key'].str.startswith('bogo'), 'city_key'] = 'bogotá, d.c.'
-geodata = boundaries.merge(data, how='left', left_on='boundary_key', right_on='city_key')
-matched = len(geodata[geodata['city'].notna()])
+boundaries['divipola'] = boundaries['COD_DANE'].astype(int)
+geodata = boundaries.merge(data, how='left', left_on='divipola', right_on='divipola')
+matched = len(geodata[geodata['divipola'].notna()])
 unmatched = len(data) - matched
 print('Matched boundaries: %i. Unmatched boundaries: %i' % (matched, unmatched))
 
