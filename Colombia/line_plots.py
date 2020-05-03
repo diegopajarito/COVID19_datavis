@@ -16,7 +16,9 @@ daily_total.columns = ['day', 'new_cases']
 daily_total['total_cases'] = daily_total['new_cases'].cumsum()
 ax = sns.lineplot('day', 'total_cases', data=daily_total)
 ax1 = sns.scatterplot('day', 'new_cases', data=daily_total, alpha=0.5, label='New Cases')
+plt.axvline(max(daily_total['day']) - 14)
 ax.set(xlabel='Days after symptoms reported (FIS)', ylabel='Confirmed cases', title='COVID-19 Colombia')
+ax.set_yscale('log')
 plt.savefig('plots/total_cases.png')
 plt.show()
 plt.close()
@@ -28,6 +30,7 @@ total_origin.columns = ['day', 'origin', 'new_cases']
 total_origin['total_origin'] = total_origin.groupby('origin')['new_cases'].transform(pd.Series.cumsum)
 ax = ax = sns.lineplot('day', 'total_origin', data=total_origin, hue='origin')
 ax.set(xlabel='Days after symptoms reported (FIS)', ylabel='Confirmed cases', title='COVID-19 Colombia')
+plt.axvline(max(daily_total['day']) - 14)
 plt.savefig('plots/total_cases_origin.png')
 plt.close()
 
@@ -38,6 +41,7 @@ total_treatment.columns = ['day', 'treatment', 'new_cases']
 total_treatment['total_treatment'] = total_treatment.groupby('treatment')['new_cases'].transform(pd.Series.cumsum)
 ax = ax = sns.lineplot('day', 'total_treatment', data=total_treatment, hue='treatment')
 ax.set(xlabel='Days after symptoms reported (FIS)', ylabel='Confirmed cases', title='COVID-19 Colombia')
+plt.axvline(max(daily_total['day']) - 14)
 plt.savefig('plots/total_cases_treatment.png')
 plt.close()
 

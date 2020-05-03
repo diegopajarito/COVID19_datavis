@@ -17,7 +17,7 @@ for country in countries[1:]:
     ax = sns.lineplot(x='date', y=country, data=data_country.dropna(), label=country)
 plt.title('COVID-19 Death Rates')
 plt.ylabel('Death Rates (%)')
-plt.ylim(0, 15)
+plt.ylim(0, 17)
 plt.xticks(rotation=45, size=6)
 plt.savefig(path)
 plt.close()
@@ -25,7 +25,8 @@ plt.close()
 
 # Death cases Vs. Death Rate
 death_rates = getData.get_death_rates()
-sns.scatterplot(x='days_after_c1', y='death_rate', hue='death_cases', size='death_cases', data=death_rates)
+sns.scatterplot(x='days_after_c1', y='death_rate', hue='death_cases', size='death_cases',
+                sizes=(0, 100, 1000, 10000, 50000, 100000), data=death_rates)
 plt.xlabel('Days after Case 1')
 plt.ylabel('Death Rate % (Deaths/Confirmed)')
 plt.savefig('plots/deaths_rates_days.png')
