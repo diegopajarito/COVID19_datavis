@@ -28,7 +28,7 @@ print('Matched boundaries: %i. Unmatched boundaries: %i' % (matched, unmatched))
 # Plot Individual maps per region
 title = 'COVID-19 cases near %s airport(s)'
 airport_areas = [['Bogotá', (-76, 3.4, -73, 5.65)],
-                 ['Medellín', (-77, 5.7, -75, 7.4)],
+                 ['Antioquia - Chocó', (-76.5, 5.5, -75.5, 7.4)],
                  ['Cali', (-77, 3.3, -75, 4.8)],
                  ['North-East', (-74, 6.9, -72, 8.4)],
                  ['Caribbean Coast', (-76, 9.7, -72.5, 12.325)]]
@@ -42,10 +42,10 @@ ax1.remove()
 ax2.remove()
 ax1 = fig.add_subplot(gs[0, 0:])
 airport_areas = [['  ', (-77, 3.3, -72, 5.4), ax1],
-                 ['Medellín', (-76.8, 5.6, -74.8, 7.1), ax3],
-                 ['Cali', (-77, 3.3, -75, 4.8), ax4],
-                 ['Bucaramanga - Cúcuta', (-74, 6.9, -72, 8.4), ax5],
-                 ['Caribbean Coast', (-76, 9.7, -72.5, 12.325), ax6]]
+                 ['Antioquia - Chocó', (-77.8, 5, -74.5, 7.1), ax3],
+                 ['Bucaramanga - Cúcuta', (-73.5, 6.9, -72, 8.4), ax4],
+                 ['Caribbean Coast', (-76, 9.5, -72, 12.325), ax5],
+                 ['Pacific Coast', (-77.8, 2.7, -74.8, 5), ax6]]
 for region in airport_areas:
     limits = region[1]
     xlim = (limits[0], limits[2])
